@@ -1,0 +1,28 @@
+select ID, NAME, Phone from account
+select id, name ,Project_Name__c,Status__c  from Salesforce_Project__c
+select id, name, mailingcity from contact where mailingcity ='Paris'
+
+
+select id, name, mailingcity from contact where name like 'A%'
+select id, name, phone, active__c from account order by name desc
+select id, name, phone, active__c, createddate from account order by createddate desc
+select id, name, project_name__c, status__c from salesforce_project__c where status__c !='New' 
+select id, name, phone, accountNumber, website from account where (phone!= null or website !=null) and accountNumber !=null
+// child obj den parent bilgisi alma (account.name) 
+select id, name, phone, account.name, account.industry from contact where account.industry = 'Energy'
+select id, name, status__c, priority__c, salesforce_project__r.project_name__c, salesforce_project__r.status__c from salesforce_ticket__c
+
+//parent child child parent
+select id, name,account.name,account.website ,account.industry , account.active__c ,phone from contact
+select id, name, subject__c, salesforce_project__c, salesforce_project__r.name, salesforce_project__r.status__c from salesforce_ticket__c
+select id, name,(select lastName, phone from contacts) from account
+select id, name, project_name__c,(select name, subject__c, priority__c from salesforce_tickets__r) from salesforce_project__c
+
+select id, name,project_name__c, status__c, (select name, subject__c, priority__c from salesforce_tickets__r) from salesforce_project__c
+select count(id ), count(mailingcity) from contact
+select leadsource, count(name) from lead group by leadsource
+select leadsource, count(name) from lead group by leadsource HAVING count(name) > 5
+
+select sum(amount), stageName from opportunity where isclosed = false group by stageName
+
+select leadsource, count(name) from lead group by leadsource

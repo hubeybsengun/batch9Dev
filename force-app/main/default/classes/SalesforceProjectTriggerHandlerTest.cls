@@ -1,0 +1,26 @@
+@istest
+public class SalesforceProjectTriggerHandlerTest {
+    @istest
+    private static void testFuture1(){
+        //prepare data
+        Salesforce_Project__c sp = new Salesforce_Project__c();
+        sp.Project_Name__c = 'Test future';
+        sp.Description__c = 'Test description';
+      
+        Salesforce_Project__c sp2 = new Salesforce_Project__c();
+        sp2.Project_Name__c = 'Test future2';
+        sp2.Description__c = 'Test description2';
+      
+        List<Salesforce_Project__c> insertSP = new List<Salesforce_Project__c>{sp,sp2};
+        insert insertSP;
+
+        Set<id> setId = new Set<id>{sp.id, sp2.id};
+
+        test.startTest();
+        SalesforceProjectTriggerHandler.updateProjectDescription(setId);
+        test.stopTest();
+
+        List<Salesforce_Project__c> resultSP = [select id, description__c from Salesforce_Project__c];
+        system.assert(resultSP[0].description__c.contains('future'));
+    }
+}
