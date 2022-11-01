@@ -1,3 +1,5 @@
+//Updating description of ALL accounts.
+//also getting statistics using stateful
 public class AccountsBatch implements database.Batchable<SObject>, database.stateful {
             integer numberOfRecords = 0;
             integer count = 0;
@@ -22,6 +24,7 @@ public class AccountsBatch implements database.Batchable<SObject>, database.stat
         system.debug('number of records updated till now is ' + numberOfRecords);
         update scope;
     }
+    //finish method called once all records are processed.
     public void finish(Database.BatchableContext bc){
         System.debug('finish method executed. Batch done. Simple. ');
     }
