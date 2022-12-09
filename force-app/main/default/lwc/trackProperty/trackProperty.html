@@ -1,0 +1,17 @@
+<template>
+    <lightning-card
+        title="Track Property">
+        <div>
+            <lightning-input
+                type="text"
+                label="Enter your Title"
+                value={contact.title}
+                onchange={handleChange}>
+            </lightning-input>
+        </div>
+        <div>
+            {contact.name} stays at {contact.stay} and work as {contact.title}
+        </div>
+
+    </lightning-card>
+</template>
